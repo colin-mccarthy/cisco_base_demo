@@ -1,0 +1,41 @@
+
+---
+
+  - name: GET VARS
+    include_vars: 
+      dir: vars
+      extensions:
+          - yml
+
+
+  - name: CONFIGURE BANNER FROM FILE
+    net_banner:
+      banner: login
+      text: "{{ lookup('file', './files/login_banner.cfg') }}"
+      state: present
+
+
+  - name: BASE CONFIG TEMPLATE  
+    ios_config:   
+      src: base_config.j2
+      save: no
+      
+  - name: OSPF CONFIG TEMPLATE  
+    ios_config:   
+      src: ospf_config.j2
+      save: no 
+
+
+  - name: POC TEMPLATE
+    ios_config:
+      src: poc.j2
+      save: no
+
+
+
+#  - name: INTERFACE CONFIG TEMPLATE
+#    ios_config:
+#      src: interface_config.j2
+#      save: yes
+
+

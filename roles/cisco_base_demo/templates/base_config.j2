@@ -1,0 +1,95 @@
+
+service nagle
+no service pad
+service timestamps debug datetime localtime
+service timestamps log datetime localtime
+logging buffered {{ log_buffer }}
+logging console critical
+logging monitor warnings
+username {{ base_user }} privilege 15 secret 0 {{ base_user_password }}
+
+aaa new-model
+aaa authentication login default group tacacs+ local
+aaa authentication enable default group tacacs+ enable
+aaa authorization config-commands
+aaa authorization exec default group tacacs+ local
+aaa authorization commands 1 default group tacacs+ none
+aaa authorization commands 15 default group tacacs+ none
+aaa accounting exec default start-stop group tacacs+
+aaa accounting network default start-stop group tacacs+
+aaa accounting connection default start-stop group tacacs+
+aaa accounting system default start-stop group tacacs+
+aaa session-id common
+
+
+clock timezone {{ timezone }} -7
+clock summer-time {{ timezone }} recurring
+vtp mode {{ vtp_mode }}
+
+ip routing
+ip domain-name {{ domain_name }}
+ip name-server {{ nameserver1 }}
+ip name-server {{ nameserver2 }}
+
+login on-failure log every {{ log_failure_count }}
+login on-success log
+
+spanning-tree mode {{ stp_mode }}
+spanning-tree extend system-id
+vlan internal allocation policy ascending
+
+ip ssh time-out {{ ssh_timeout }}
+ip ssh version {{ ssh_version }}
+
+ip classless
+no ip http server
+no ip http secure-server
+ip tacacs source-interface {{ tacacs_source_interface }}
+ 
+logging source-interface {{ logging_source_interface }}
+logging {{ logserver1 }}
+logging {{ logserver2 }} 
+
+snmp-server community {{ snmp_community }} RO 99
+snmp-server trap-source {{ snmp_source_interface }}
+snmp-server contact {{ snmp_email }}
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server host {{ snmp_host }} {{ snmp_community }}
+
+tacacs-server host {{ tacacsserver1 }} key 7 {{ tacacs_key }}
+tacacs-server host {{ tacacsserver2 }} key 7 {{ tacacs_key }}
+tacacs-server timeout {{ tacacs_timeout }}
+tacacs-server directed-request
+
+line con 0
+line vty 0 4
+ exec-timeout 30 0
+ privilege level 15
+ transport preferred ssh
+ transport input ssh
+ transport output ssh
+line vty 5 15
+ exec-timeout 30 0
+ privilege level 15
+ transport preferred ssh
+ transport input ssh
+ transport output ssh
+ 
+ntp source {{ ntp_source_interface }}
+ntp server {{ ntpserver1 }}
+ntp server {{ ntpserver2 }}
+ntp server {{ ntpserver3 }} prefer
+
+
+
+ 
+

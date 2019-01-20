@@ -1,0 +1,6 @@
+---
+
+- name: cisco_base_demo
+  src: https://github.com/colin-mccarthy/cisco_base_config
+  scm: git
+  version: master

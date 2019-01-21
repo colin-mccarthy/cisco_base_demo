@@ -7,7 +7,7 @@ Using DHCP option 67 you can push a script to the device to be executed using th
 
 ![callback][1]
 
-Note the requesting host must be defined in the inventory associated with the job template. If Tower fails to locate the host, the request will be denied. That is why the ZTP script must assign the correct IP.
+Note the requesting host must be defined in the inventory associated with the job template. If Tower fails to locate the host, the request will be denied. That is why DHCP must configured to assign the correct IP and that IP must be added into inventory before hand.
 
 Successful requests create an entry on the Jobs page, where results and history can be viewed.
 

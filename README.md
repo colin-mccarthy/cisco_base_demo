@@ -12,6 +12,10 @@ Note the requesting host must be defined in the inventory associated with the jo
 Successful requests create an entry on the Jobs page, where results and history can be viewed.
 
 
+by default the host headers are  `REMOTE_HOST_HEADERS = ['REMOTE_ADDR', 'REMOTE_HOST']`
+If you’re behind a load balancer you'll need to allow `HTTP_X_FORWARDED_FOR`
+
+
 
 
 [1]: readme_pics/callback.jpg

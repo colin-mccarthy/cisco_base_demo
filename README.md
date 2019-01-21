@@ -16,6 +16,11 @@ by default the host headers are  `REMOTE_HOST_HEADERS = ['REMOTE_ADDR', 'REMOTE_
 If you’re behind a load balancer you'll need to allow `HTTP_X_FORWARDED_FOR`
 
 
+Usefull Links:
+
+https://github.com/ansible/awx/blob/devel/awx/api/templates/api/job_template_callback.md
+
+
 
 
 [1]: readme_pics/callback.jpg

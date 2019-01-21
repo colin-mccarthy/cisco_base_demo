@@ -3,4 +3,4 @@
   hosts: ios
   gather_facts: no
   roles:
-    - cisco_base_config
+    - cisco_base_demo
